@@ -31,17 +31,18 @@ let dogImages = [
 //Possible Answer Words
 
 let possibleWords = [
-    "Retrievers", 
-    "Bulldogs", 
-    "Beagles", 
-    "Poodles",
-    "Terriers",
-    "Boxers",
-    "Huskies", 
-    "Pomeranians",
-    "Pugs",
-    "Chihuahuas"
+    "RETRIEVERS", 
+    "BULLDOGS", 
+    "BEAGLES", 
+    "POODLES",
+    "TERRIERS",
+    "BOXERS",
+    "HUSKIES", 
+    "POMERANIANS",
+    "PUGS",
+    "CHIHUAHUAS"
 ];
+
 
 //Choose Random Word on startup and create Game Interface
 
@@ -57,7 +58,7 @@ window.onload = function() {
 
 function createWord() {
   word = possibleWords[Math.floor(Math.random() * possibleWords.length)];
-  //word = word.toUpperCase();
+  word = word.toUpperCase();
   console.log("Word: " + word);
   remainingLetters = word.length;
   console.log("Remaining Letters: " + remainingLetters);
@@ -103,10 +104,9 @@ function displayGame() {
 }
 
 function displayImage() {
-    let picture = document.getElementById('picture');
-      picture.innerHTML = '
- 
-      '
+    cI = possibleWords.indexOf(word);
+    console.log("Image Index: " + cI);
+    document.getElementById("picture").src = dogImages[cI];
 }
 
 //Reset Stats Function
@@ -123,7 +123,7 @@ function resetStats() {
 
   document.onkeyup = function(event) {
     userGuess = event.key;
-    //userGuess = userGuess.toUpperCase();
+    userGuess = userGuess.toUpperCase();
     console.log("User Guesses: " + userGuess);
   
     if (userGuess.length !==1 || !isNaN(userGuess) || lettersGuessed.includes(userGuess)) {
@@ -137,9 +137,8 @@ function resetStats() {
     }
 
     if (lives === 0) {
-      alert("You have died, the word was: " + word);
-      cI = possibleWords.indexOf(word);
-      console.log("Image Index: " + currentImage);
+      alert("You have lost, the word was: " + word + "!");
+      displayImage();
       lossCount++;
       resetStats();
       displayGame();
@@ -152,7 +151,8 @@ function resetStats() {
     }
 
     if (remainingLetters === 0) {
-      alert("Congratulations!  You win, the word was: " + word);
+      alert("Congratulations!  You win, the word was: " + word + "!");
+      displayImage();
       winCount++;
       resetStats();
       displayGame();
