@@ -17,4 +17,10 @@ h1 {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border-style: solid;
+    box-shadow: 5px 5px grey;
+}
+
+body {
+    background-color: lightgrey;
 }
